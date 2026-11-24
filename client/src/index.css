@@ -1,0 +1,149 @@
+@import '@fontsource/montserrat/cyrillic-400.css';
+@import '@fontsource/montserrat/latin-400.css';
+@import '@fontsource/montserrat/cyrillic-500.css';
+@import '@fontsource/montserrat/latin-500.css';
+@import '@fontsource/montserrat/cyrillic-600.css';
+@import '@fontsource/montserrat/latin-600.css';
+@import '@fontsource/montserrat/cyrillic-700.css';
+@import '@fontsource/montserrat/latin-700.css';
+@import '@fontsource/montserrat/cyrillic-800.css';
+@import '@fontsource/montserrat/latin-800.css';
+@import 'tailwindcss';
+
+/* Палитра и типографика — строго по брендбуку HabitTrack. */
+@theme {
+  --color-brand-green: #2ecc71;
+  --color-brand-green-strong: #2d8560;
+  --color-brand-blue: #3498db;
+  --color-brand-blue-strong: #2471a3;
+  --color-brand-ink: #2c3e50;
+  --color-brand-accent: #85c1e9;
+  --color-brand-muted: #576877;
+  --color-brand-line: #e3ebf1;
+  --color-brand-soft: #f4f8fb;
+  --color-brand-mint: #eaf8f1;
+  --color-brand-danger: #b03a2e;
+  --color-brand-danger-soft: #fdf2f0;
+  --color-brand-warning: #96690f;
+  --color-brand-warning-soft: #fdf6e3;
+  --font-sans: 'Montserrat', 'Roboto', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: #fff;
+  }
+
+  body {
+    @apply bg-white antialiased;
+    color: var(--color-brand-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4 {
+    line-height: 1.2;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-brand-blue);
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border bg-white shadow-sm;
+    border-color: var(--color-brand-line);
+  }
+
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Фирменный градиент сохранён, светлый слой обеспечивает контраст текста ≥ 4.5:1. */
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+      linear-gradient(135deg, var(--color-brand-green), var(--color-brand-blue));
+    color: var(--color-brand-ink);
+    box-shadow: none;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(0.97);
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50 border bg-white;
+    border-color: var(--color-brand-accent);
+    color: var(--color-brand-ink);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--color-brand-soft);
+  }
+
+  .btn-danger {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-50 border bg-white;
+    border-color: #f5c6c0;
+    color: var(--color-brand-danger);
+  }
+
+  .btn-danger:hover:not(:disabled) {
+    background: var(--color-brand-danger-soft);
+  }
+
+  .input {
+    @apply w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm shadow-sm placeholder:text-[#8b98a5];
+    border-color: var(--color-brand-line);
+    color: var(--color-brand-ink);
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-brand-blue);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.18);
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-semibold;
+    color: var(--color-brand-ink);
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+
+  .link {
+    @apply text-sm font-semibold hover:underline;
+    color: var(--color-brand-blue-strong);
+  }
+
+  .alert {
+    @apply rounded-lg px-3 py-2 text-sm;
+  }
+
+  .alert-success {
+    @apply rounded-lg px-3 py-2 text-sm;
+    background: var(--color-brand-mint);
+    color: var(--color-brand-green-strong);
+  }
+
+  .alert-error {
+    @apply rounded-lg px-3 py-2 text-sm;
+    background: var(--color-brand-danger-soft);
+    color: var(--color-brand-danger);
+  }
+
+  .brand-gradient {
+    background-image: linear-gradient(135deg, var(--color-brand-green), var(--color-brand-blue));
+  }
+
+  /* Очень светлый градиент для больших блоков: текст остаётся графитовым. */
+  .brand-tint {
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+      linear-gradient(135deg, var(--color-brand-green), var(--color-brand-blue));
+  }
+}

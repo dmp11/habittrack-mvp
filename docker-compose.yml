@@ -1,0 +1,43 @@
+services:
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      APP_URL: ${APP_URL:-http://localhost:4000}
+      API_URL: ${API_URL:-http://localhost:4000/api}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?Задайте JWT_ACCESS_SECRET в .env}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?Задайте JWT_REFRESH_SECRET в .env}
+      DATABASE_URL: postgres://habittrack:${POSTGRES_PASSWORD:-habittrack}@db:5432/habittrack
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-HabitTrack <noreply@habittrack.local>}
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:admin@habittrack.local}
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: habittrack
+      POSTGRES_USER: habittrack
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-habittrack}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U habittrack -d habittrack"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  pgdata:

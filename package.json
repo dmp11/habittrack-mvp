@@ -1,0 +1,54 @@
+{
+  "name": "habittrack-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HabitTrack MVP — трекер привычек со статистикой",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c green,cyan \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "node --watch server/index.js",
+    "dev:client": "vite --config client/vite.config.ts",
+    "build": "npm run typecheck && vite build --config client/vite.config.ts",
+    "typecheck": "tsc -p client/tsconfig.json --noEmit",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "serve": "node server/index.js",
+    "test": "node --test server/test/*.test.js",
+    "test:watch": "node --test --watch server/test/*.test.js",
+    "keys": "node server/scripts/generate-vapid.js"
+  },
+  "dependencies": {
+    "@fontsource/montserrat": "^5.3.0",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^7.0.6",
+    "pg": "^8.16.3",
+    "swagger-ui-express": "^5.0.1",
+    "web-push": "^3.6.7",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react": "^5.0.2",
+    "chart.js": "^4.5.0",
+    "concurrently": "^9.2.1",
+    "react": "^19.1.1",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.9.1",
+    "supertest": "^7.1.4",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5"
+  }
+}

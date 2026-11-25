@@ -1,3 +1,4 @@
+[![CI](https://github.com/dmp11/habittrack-mvp/actions/workflows/ci.yml/badge.svg)](https://github.com/dmp11/habittrack-mvp/actions/workflows/ci.yml)
 # HabitTrack MVP
 
 Трекер привычек со статистикой: SPA на React + TypeScript и REST API на Node.js/Express. Интерфейс на русском, mobile-first, данные и напоминания привязаны к часовому поясу пользователя.
